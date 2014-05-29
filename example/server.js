@@ -8,7 +8,6 @@ var config = {
 
 var stats = munin(config);
 stats.describeGraph('uptime', {}, ['uptime']);
-stats.initStat('uptime', { type: 'GAUGE' });
-setInterval(function() {
-  stats.setStat('uptime', process.uptime());
-}, 1000);
+stats.initStat('uptime', { type: 'GAUGE' }, null, function() {
+    return process.uptime();
+});
